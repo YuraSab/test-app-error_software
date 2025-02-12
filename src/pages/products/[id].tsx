@@ -46,17 +46,17 @@ export default function ProductDetail() {
         <div className="w-full min-h-screen bg-white flex justify-center">
             {
                 product &&
-                <div className={"py-6 flex flex-col"}>
-                    <h2 className="text-black text-4xl font-bold">{product.name}</h2>
+                <div className={"py-6 flex flex-col items-center max-w-4xl px-4 sm:px-6"}>
+                    <h2 className="text-black text-3xl sm:text-4xl font-bold text-center">{product.name}</h2>
                     <Image
                         src={product.image} alt={"product image"}
                         width={0} height={400}
                         className={"self-center pb-4"}
                     />
-                    <p className="text-black text-2xl font-bold">{product.price}$</p>
-                    <p className={`text-black text-2xl font-bold ${product.availability === "In Stock" ? "text-green-700" : "text-red-700"}`}>{product.availability}</p>
-                    <p className="text-black text-xl pt-8">{product.description}</p>
-                    <DefaultButton text={"← Back"} onclick={handleBackClick} customStyles={"w-fill self-center mt-8 px-14"}/>
+                    <p className="text-black text-xl sm:text-2xl font-bold">{product.price}$</p>
+                    <p className={`text-black text-xl sm:text-2xl font-bold ${product.availability === "In Stock" ? "text-green-700" : "text-red-700"}`}>{product.availability}</p>
+                    <p className="text-black text-lg sm:text-xl pt-8">{product.description}</p>
+                    <DefaultButton text={"← Back"} onclick={handleBackClick} customStyles={"w-fill sm:w-auto self-center mt-6 px-8 sm:px-14"}/>
                 </div>
             }
         </div>

@@ -35,10 +35,10 @@ export default function Products() {
     if (!isLoading && products.length === 0) return <p>Products not found</p>
 
     return (
-        <div className={"w-full min-h-screen bg-white px-8 py-4"}>
+        <div className={"w-full min-h-screen bg-white px-4 sm:px-8 py-4"}>
             <DefaultButton text={"← Back to menu"} onclick={() => router.push("/")} customStyles={"w-fill self-center myу-8"}/>
 
-            <h4 className={"text-3xl font-bold text-blue-600 text-center"}>Products</h4>
+            <h4 className={"text-3xl font-bold text-blue-600 text-center mt-2"}>Products</h4>
             <input
                 type={"text"}
                 placeholder={"Search products..."}
