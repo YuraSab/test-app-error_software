@@ -10,6 +10,9 @@ export default function Home() {
           <Link href={"/products"}>
               <DefaultButton text={"Browse products"}/>
           </Link>
+          {/*<button className={`rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 mt-2 w-fit`}>*/}
+          {/*    Browse products*/}
+          {/*</button>*/}
       </div>
   );
 }

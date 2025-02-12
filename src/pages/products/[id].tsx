@@ -6,41 +6,59 @@ import {DefaultButton} from "@/ui/Buttons";
 
 export default function ProductDetail() {
 
-
     const router = useRouter();
     const { id } = router.query;
+
     const [product, setProduct] = useState<Product | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleBackClick = () => {
-        router.back();
+        if (window.history.length > 2) {
+            router.back();
+        } else {
+            router.push("/products");
+        }
     }
 
     useEffect(() => {
+        if (!id) return;
+
+        setIsLoading(true);
         fetch("/api/products")
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok)
+                    throw new Error("Failed to fetch product");
+                return res.json()
+            })
             .then((data) => {
                 const foundProduct = data.find((el: Product) => el.id === Number(id));
                 setProduct(foundProduct)
-            });
-    }, [id]);
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setIsLoading(false));
+    }, [router.isReady, id]);
 
 
-    if (!product) return <p>Product not found</p>
+    if (isLoading) return <p>Loading...</p>;
+    if (!isLoading && !product) return <p>Product not found</p>
 
     return (
         <div className="w-full min-h-screen bg-white flex justify-center">
-            <div className={"py-6 flex flex-col"}>
-                <h2 className="text-black text-4xl font-bold">{product.name}</h2>
-                <Image
-                    src={product.image} alt={"product image"}
-                    width={0} height={400}
-                    className={"self-center pb-4"}
-                />
-                <p className="text-black text-2xl font-bold">{product.price}$</p>
-                <p className={`text-black text-2xl font-bold ${product.availability === "In Stock" ? "text-green-700" : "text-red-700"}`}>{product.availability}</p>
-                <p className="text-black text-xl pt-8">{product.description}</p>
-                <DefaultButton text={"← Back"} onclick={handleBackClick} customStyles={"w-fill self-center mt-8 px-14"}/>
-            </div>
+            {
+                product &&
+                <div className={"py-6 flex flex-col"}>
+                    <h2 className="text-black text-4xl font-bold">{product.name}</h2>
+                    <Image
+                        src={product.image} alt={"product image"}
+                        width={0} height={400}
+                        className={"self-center pb-4"}
+                    />
+                    <p className="text-black text-2xl font-bold">{product.price}$</p>
+                    <p className={`text-black text-2xl font-bold ${product.availability === "In Stock" ? "text-green-700" : "text-red-700"}`}>{product.availability}</p>
+                    <p className="text-black text-xl pt-8">{product.description}</p>
+                    <DefaultButton text={"← Back"} onclick={handleBackClick} customStyles={"w-fill self-center mt-8 px-14"}/>
+                </div>
+            }
         </div>
     )
 }
