@@ -1,0 +1,4 @@
+1) Clone project:    git clone https://github.com/YuraSab/test-app-error_software.git
+2) Open project root in console
+3) Create docker container:    docker build -t nextjs-app .
+4) Launch docker container:    docker run -p 3000:3000 nextjs-app

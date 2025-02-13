@@ -48,10 +48,15 @@ export default function ProductDetail() {
                 product &&
                 <div className={"py-6 flex flex-col items-center max-w-4xl px-4 sm:px-6"}>
                     <h2 className="text-black text-3xl sm:text-4xl font-bold text-center">{product.name}</h2>
+                    {/*<Image*/}
+                    {/*    src={product.image} alt={"product image"}*/}
+                    {/*    width={0} height={400}*/}
+                    {/*    className={"self-center pb-4"}*/}
+                    {/*/>*/}
                     <Image
-                        src={product.image} alt={"product image"}
-                        width={0} height={400}
-                        className={"self-center pb-4"}
+                        src={"/headphones.jpg"} alt={"product image"}
+                        width={100} height={400}
+                        className={"self-center pb-4 w-fit h-[400px]"}
                     />
                     <p className="text-black text-xl sm:text-2xl font-bold">{product.price}$</p>
                     <p className={`text-black text-xl sm:text-2xl font-bold ${product.availability === "In Stock" ? "text-green-700" : "text-red-700"}`}>{product.availability}</p>
